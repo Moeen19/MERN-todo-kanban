@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "backend/package.json",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/" },
+    { "src": "/api/(.*)", "dest": "/backend/$1" },
     { "handle": "filesystem" }
   ]
 }
