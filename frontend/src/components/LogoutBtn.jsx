@@ -7,7 +7,7 @@ export default function Logout() {
   const router = useRouter();
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://localhost:5000/users/logout", {
+      const res = await fetch("https://mern-todo-kanban.vercel.app/users/logout", {
         method: "POST",
         credentials: "include",
       });

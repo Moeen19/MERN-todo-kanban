@@ -39,7 +39,7 @@ export default function Todos({ todos, token }) {
       _id: id,
     };
     try {
-      const res = await fetch("http://localhost:5000/todos", {
+      const res = await fetch("https://mern-todo-kanban.vercel.app/todos", {
         method: "DELETE",
         credentials: "include",
 
@@ -67,7 +67,7 @@ export default function Todos({ todos, token }) {
   };
 
   const updatingDoneProp = async( _id, status) => {
-    const res = await fetch("http://localhost:5000/todos", {
+    const res = await fetch("https://mern-todo-kanban.vercel.app/todos", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
