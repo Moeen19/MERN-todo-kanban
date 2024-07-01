@@ -9,18 +9,23 @@ const cookieStore = cookies();
 const token = cookieStore.get("jwt");
 
 const getTodos = async () => {
-  const res = await fetch("http://localhost:5000/todos",  {
-    method: "GET",
-    headers: { Cookie: cookies().toString() },
-    credentials: "include",
-  });
-  if (res.status !== 200) {
+  if(token) {
+    const res = await fetch("http://localhost:5000/todos",  {
+      method: "GET",
+      headers: { Cookie: cookies().toString() },
+      credentials: "include",
+    });
+    if (res.status !== 200) {
+      redirect('/login')
+    }
+    const data = await res.json();
+    console.log(data, '---asdf-')
+    return data;
+  } else {
     redirect('/login')
   }
-  const data = await res.json();
-  console.log(data, '---asdf-')
-  return data;
 };
+
 
 
 export default async function Home() {
