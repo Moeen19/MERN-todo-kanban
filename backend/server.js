@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT;
 connectDB();
 app.use(cors({
-  origin: "*",
+  origin: "https://mern-todo-kanban-vraf.vercel.app",
   credentials: true,
   methods: ['DELETE', 'PUT', 'GET', 'POST'],
 }))
