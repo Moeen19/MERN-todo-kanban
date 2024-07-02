@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT;
 connectDB();
 app.use(cors({
-  origin: 'https://mern-todo-kanban-production.up.railway.app',
+  origin: "*",
   credentials: true,
   methods: ['DELETE', 'PUT', 'GET', 'POST'],
 }))
