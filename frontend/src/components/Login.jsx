@@ -25,7 +25,7 @@ export default function Login({ token }) {
         password,
       };
 
-      const res = await fetch("https://mern-todo-kanban-production.up.railway.app/login", {
+      const res = await fetch("https://mern-todo-kanban-production.up.railway.app/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
