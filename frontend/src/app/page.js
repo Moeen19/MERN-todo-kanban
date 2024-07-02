@@ -11,7 +11,7 @@ export default async function Home() {
 
   const getTodos = async () => {
     if (token) {
-      const res = await fetch("https://mern-todo-kanban-api.vercel.app/todos", {
+      const res = await fetch("http://localhost:5000/todos", {
         method: "GET",
         headers: { Cookie: cookies().toString() },
         credentials: "include",
