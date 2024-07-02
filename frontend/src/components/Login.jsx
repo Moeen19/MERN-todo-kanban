@@ -25,7 +25,7 @@ export default function Login({ token }) {
         password,
       };
 
-      const res = await fetch("https://mern-todo-kanban-api.vercel.app/users/login", {
+      const res = await fetch("http://localhost:5000/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
