@@ -67,7 +67,7 @@ export default function Todos({ todos, token }) {
   };
 
   const updatingDoneProp = async( _id, status) => {
-    const res = await fetch("https://mern-todo-kanban.vercel.app/todos", {
+    const res = await fetch("https://mern-todo-kanban-production.up.railway.app/todos", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
