@@ -13,4 +13,9 @@ router.post('/', registerUser)
 // Logout User
 router.post('/logout', logoutUser)
 
+// get
+router.get('/', (req, res) => {
+    res.status(200).json({msg: "Helllllll"})
+})
+
 export default router;
