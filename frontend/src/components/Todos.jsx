@@ -39,7 +39,7 @@ export default function Todos({ todos, token }) {
       _id: id,
     };
     try {
-      const res = await fetch("https://mern-todo-kanban.vercel.app/todos", {
+      const res = await fetch("https://mern-todo-kanban-api.vercel.app/todos", {
         method: "DELETE",
         credentials: "include",
 

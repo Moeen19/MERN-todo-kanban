@@ -30,7 +30,7 @@ function RegisterUser({ token }) {
         password: password,
       };
       console.log(user);
-      const res = await fetch("https://mern-todo-kanban.vercel.app/users", {
+      const res = await fetch("https://mern-todo-kanban-api.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
