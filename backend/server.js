@@ -34,6 +34,10 @@ app.get('/', (req, res) =>{
   res.status(200).json({msg: "HELLO WORLD"})
 })
 
+app.get('/users', (req, res) => {
+  res.status(200).json({msg: "BOOOHOOHOHO"})
+})
+
 // Error handling middleware
 app.use(notFound)
 app.use(errorHandler);
