@@ -9,7 +9,6 @@ const generateToken = (res, userId) => {
         secure: true,
         sameSite: 'None',
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        domain: 'mern-todo-kanban-production.up.railway.app',
         path: '/'
     })
 }
