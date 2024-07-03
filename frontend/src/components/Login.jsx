@@ -49,6 +49,7 @@ export default function Login({ token }) {
 
   return (
     <div>
+      <ToastContainer />
       <h1 className="text-white font-semibold text-[62px] mx-auto w-fit">
         Todo Kanban
       </h1>
