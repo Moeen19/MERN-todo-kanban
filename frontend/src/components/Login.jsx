@@ -37,7 +37,6 @@ export default function Login({ token }) {
       if (res.ok) {
         const data = await res.json();
         console.log("User logged in");
-        toast.loading("Logging In")
         router.push("/");
       } else {
         setIncorrect(true)
