@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 // import { cookie } from "next/headers"
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Login({ token }) {
   const [email, setEmail] = useState("");
@@ -36,6 +37,7 @@ export default function Login({ token }) {
       if (res.ok) {
         const data = await res.json();
         console.log("User logged in");
+        toast.loading("Logging In")
         router.push("/");
       } else {
         setIncorrect(true)
