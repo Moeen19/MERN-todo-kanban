@@ -37,6 +37,7 @@ export default function Login({ token }) {
       if (res.ok) {
         const data = await res.json();
         console.log("User logged in");
+        toast.loading("Logging In")
         router.push("/");
       } else {
         setIncorrect(true)
@@ -45,10 +46,6 @@ export default function Login({ token }) {
       console.log(error);
     }
   };
-  const logFunc = (e) => {
-    toast.loading("Logging in");
-    setTimeout(handleSubmit(e), 2000)
-  }
 
   return (
     <div>
@@ -59,7 +56,7 @@ export default function Login({ token }) {
       <div className="max-w-[450px] mx-auto mt-[8px] rounded-[8px] shadow-2xl shadow-gray-900 p-4 bg-white w-full">
         <h1 className="w-fit mx-auto font-bold  text-[32px]">Login</h1>
         <form
-          onSubmit={(e) => logFunc(e)}
+          onSubmit={(e) => handleSubmit(e)}
           className=" flex gap-[18px] flex-col"
         >
           <div className="flex flex-col">
