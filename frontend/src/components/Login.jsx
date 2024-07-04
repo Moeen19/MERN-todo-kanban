@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // import { cookie } from "next/headers"
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-import Cookies from "universal-cookie";
+import Cookies from "../../../universal-cookie";
 
 export default function Login({ token }) {
   const cookies = new Cookies();
