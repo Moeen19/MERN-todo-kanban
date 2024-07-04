@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 // import { cookie } from "next/headers"
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
+import Cookies from "universal-cookie";
 
 export default function Login({ token }) {
+  const cookies = new Cookies();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -15,6 +17,13 @@ export default function Login({ token }) {
     router.refresh()
   }, []);
   if (token) {
+    cookies.set('jwt', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      path: '/'
+  })
     router.push("/");
   }
   
