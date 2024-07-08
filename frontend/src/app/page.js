@@ -44,10 +44,9 @@ export default function Home() {
     };
     getTodos();
   }, [token]);
-  let childTodos;
+  
   useEffect(() => {
     console.log("Updated todos state:", todos);
-    childTodos = todos;
   }, [todos]);
 
   return (
@@ -58,7 +57,7 @@ export default function Home() {
         </h1>
         <Logout todos={todos} token={token}/>
       </div>
-      <Todos todos={childTodos} token={token} />
+      <Todos todos={todos} token={token} />
     </main>
   );
 }
