@@ -12,10 +12,12 @@ export default function Home() {
   // const token = cookieStore.get("jwt");
   // console.log(token, "kwlejafld;");
   const router = useRouter();
+  const [token, setToken] = useState('')
   const [todos, setTodos] = useState([]);
-  let token;
+  // let token;
   useEffect(() => {
-    token = localStorage.getItem("jwt");
+    const tok = localStorage.getItem("jwt");
+    setToken(tok)
     console.log(token, "actual token");
 
     const getTodos = async () => {
@@ -54,7 +56,7 @@ export default function Home() {
         <h1 className="text-white pl-[110px] font-semibold text-[62px] mx-auto w-fit">
           Todo Kanban
         </h1>
-        <Logout todos={todos} />
+        <Logout todos={todos} token={token}/>
       </div>
       <Todos todos={todos} token={token} />
     </main>

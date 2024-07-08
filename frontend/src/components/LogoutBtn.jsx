@@ -3,8 +3,8 @@ import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function Logout({ todos }) {
-  console.log(todos)
+export default function Logout({ todos, token }) {
+  console.log(token, 'muichiro')
   const router = useRouter();
   const handleLogout = async () => {
     try {

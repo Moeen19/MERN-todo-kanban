@@ -20,8 +20,8 @@ export default function Todos({ todos, token }) {
   }, []);
 
   useEffect(() => {
-    console.log(token, 'tokito')
     if (token) {
+      console.log('toki')
       const notDone = todos.filter((item) => {
         return item.isDone === false;
       });
@@ -31,7 +31,7 @@ export default function Todos({ todos, token }) {
       setDoneTodos(done);
       setNotDoneTodos(notDone);
     }
-  }, [todos]);
+  }, [todos, token]);
 
   const handleTodoClick = (todo) => {
     setId(todo);
