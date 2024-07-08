@@ -15,11 +15,9 @@ export default function Home() {
   const [todos, setTodos] = useState([]);
   let token;
   useEffect(() => {
-    const tok = localStorage.getItem("jwt")
-    if(tok) {
-      token = tok;
-      console.log(token)
-    }
+    const token = localStorage.getItem("jwt")
+    console.log(token, 'actual token')
+  
     const getTodos = async () => {
       if (token) {
         const res = await fetch("https://mern-todo-kanban-production.up.railway.app/todos/getTodos", {
