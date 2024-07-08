@@ -33,6 +33,8 @@ export default function Todos({ todos, token }) {
       });
       setDoneTodos(done);
       setNotDoneTodos(notDone);
+    } else {
+      router.push('/login')
     }
   }, [todos]);
 
