@@ -12,13 +12,11 @@ export default function Login({ token }) {
   const [incorrect, setIncorrect] = useState(false)
   console.log(token)
 
-  
-
   useEffect(() => {
     router.refresh()
   }, []);
   if (token) {
-    // router.push("/");
+    router.push("/");
   }
   
   const handleSubmit = async (e) => {

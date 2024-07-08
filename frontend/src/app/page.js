@@ -15,8 +15,6 @@ export default function Home() {
   const router = useRouter();
   const [todos, setTodos] = useState([]);
 
-  
-  
   useEffect(() => {
     const getTodos = async () => {
       if (token) {
@@ -35,7 +33,7 @@ export default function Home() {
         return data;
       } else {
         // redirect("/login");
-        // router.push("/login");
+        router.push("/login");
       }
     };
     getTodos()
