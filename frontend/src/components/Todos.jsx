@@ -6,7 +6,7 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Todos({ todos, token }) {
+export default function Todos({ todos }) {
   const router = useRouter();
   const [notDoneTodos, setNotDoneTodos] = useState([]);
   const [Upd, setUpd] = useState(false);
@@ -14,14 +14,15 @@ export default function Todos({ todos, token }) {
   const [doneTodos, setDoneTodos] = useState([]);
   const [addModel, setAddModel] = useState(false);
   console.log(todos, "asdfjlkasjdflj;lcxmv,zxcmv");
-
+  let token;
   useEffect(() => {
     toast.success("Welcome!");
+    token = typeof window !== undefined ? localStorage.getItem("jwt") : null;
   }, []);
-
+  
   useEffect(() => {
     if (token) {
-      console.log('toki')
+      console.log('first')
       const notDone = todos.filter((item) => {
         return item.isDone === false;
       });
@@ -31,7 +32,7 @@ export default function Todos({ todos, token }) {
       setDoneTodos(done);
       setNotDoneTodos(notDone);
     }
-  }, [todos, token]);
+  }, [todos]);
 
   const handleTodoClick = (todo) => {
     setId(todo);
