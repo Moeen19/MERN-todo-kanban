@@ -5,7 +5,7 @@ import registerUser from "@/components/RegisterUser";
 import Logout from "@/components/LogoutBtn";
 import Todos from "@/components/Todos";
 import { useEffect, useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   // const cookieStore = cookies();
@@ -30,33 +30,31 @@ export default function Home() {
     console.log(token, "actual token");
 
     const getTodos = async () => {
-      if (token === null) {
-        router.push("/login");
-      } else {
-        const fetchTok = () => {
-          let tok =
-            typeof window !== undefined ? localStorage.getItem("jwt") : null;
-          setToken(tok);
-        };
-        fetchTok();
-
-        if (token) {
-          const res = await fetch(
-            "https://mern-todo-kanban-production.up.railway.app/todos/getTodos",
-            {
-              method: "POST",
-              body: JSON.stringify({ token: token }),
-              headers: { Cookie: token, "Content-type": "application/json" },
-              credentials: "include",
-            }
-          );
-
-          const data = await res.json();
-          setTodos(data);
-          console.log(todos, data);
-          return data;
-        } else if (!token) {
+      const fetchTok = () => {
+        let tok =
+          typeof window !== undefined ? localStorage.getItem("jwt") : null;
+        setToken(tok);
+        if(!tok) {
+          router.push('/login')
         }
+      };
+      fetchTok()
+      if (token) {
+        const res = await fetch(
+          "https://mern-todo-kanban-production.up.railway.app/todos/getTodos",
+          {
+            method: "POST",
+            body: JSON.stringify({ token: token }),
+            headers: { Cookie: token, "Content-type": "application/json" },
+            credentials: "include",
+          }
+        );
+
+        const data = await res.json();
+        setTodos(data);
+        console.log(todos, data);
+        return data;
+      } else if (!token) {
       }
     };
     getTodos();
