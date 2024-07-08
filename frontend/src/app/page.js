@@ -44,9 +44,7 @@ export default function Home() {
       }
     };
     getTodos();
-    if(!token) {
-      router.push('/login')
-    }
+    
   }, [token]);
   
   
