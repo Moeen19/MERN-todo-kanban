@@ -17,7 +17,7 @@ export default function Login({ token }) {
     if (token) {
       router.push("/");
     }
-  }, []);
+  }, [token]);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
