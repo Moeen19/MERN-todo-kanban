@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Todos({ todos }) {
-  console.log(todos)
+  console.log(todos, 'parent')
   const router = useRouter();
   const [notDoneTodos, setNotDoneTodos] = useState([]);
   const [Upd, setUpd] = useState(false);
