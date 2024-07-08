@@ -5,7 +5,7 @@ import registerUser from "@/components/RegisterUser";
 import Logout from "@/components/LogoutBtn";
 import Todos from "@/components/Todos";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function Home() {
   // const cookieStore = cookies();
@@ -15,37 +15,48 @@ export default function Home() {
   const [token, setToken] = useState("");
   const [todos, setTodos] = useState([]);
   // let token;
-  useEffect(() => {
-    const fetchTok = () => {
-      let tok = typeof window !== undefined ? localStorage.getItem("jwt") : null;
-      setToken(tok);
-    }
-    fetchTok()
-    if(!token) {
-      router.push("/login");
-    }
-  }, [router, token])
+  // useEffect(() => {
+  //   const fetchTok = () => {
+  //     let tok = typeof window !== undefined ? localStorage.getItem("jwt") : null;
+  //     setToken(tok);
+  //   }
+  //   fetchTok()
+  //   if(!token) {
+  //     router.push("/login");
+  //   }
+  // }, [router, token])
   useEffect(() => {
     router.refresh();
     console.log(token, "actual token");
 
     const getTodos = async () => {
-      if (token) {
-        const res = await fetch(
-          "https://mern-todo-kanban-production.up.railway.app/todos/getTodos",
-          {
-            method: "POST",
-            body: JSON.stringify({ token: token }),
-            headers: { Cookie: token, "Content-type": "application/json" },
-            credentials: "include",
-          }
-        );
+      if (token === null) {
+        router.push("/login");
+      } else {
+        const fetchTok = () => {
+          let tok =
+            typeof window !== undefined ? localStorage.getItem("jwt") : null;
+          setToken(tok);
+        };
+        fetchTok();
 
-        const data = await res.json();
-        setTodos(data);
-        console.log(todos, data);
-        return data;
-      } else if (!token) {
+        if (token) {
+          const res = await fetch(
+            "https://mern-todo-kanban-production.up.railway.app/todos/getTodos",
+            {
+              method: "POST",
+              body: JSON.stringify({ token: token }),
+              headers: { Cookie: token, "Content-type": "application/json" },
+              credentials: "include",
+            }
+          );
+
+          const data = await res.json();
+          setTodos(data);
+          console.log(todos, data);
+          return data;
+        } else if (!token) {
+        }
       }
     };
     getTodos();
