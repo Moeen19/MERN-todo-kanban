@@ -21,6 +21,7 @@ export default function Todos({ todos, token }) {
 
   useEffect(() => {
     if (token) {
+      console.log(token)
       const notDone = todos.filter((item) => {
         return item.isDone === false;
       });
