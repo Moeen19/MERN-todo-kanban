@@ -6,11 +6,10 @@ import Login from "@/components/Login";
 
 export default function login() {
   // let token;
-  // const [token, setToken] = useState('');
-  let token;
+  const [token, setToken] = useState('');
   useEffect(() => {
-    token = localStorage?.getItem("jwt")
-    
+    const token = localStorage?.getItem("jwt")
+    setToken(token)
   }, [token])
   // console.log(token, 'actual token')
   // const cookieStore = cookies();
