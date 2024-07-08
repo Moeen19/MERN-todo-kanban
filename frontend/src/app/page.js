@@ -21,7 +21,10 @@ export default function Home() {
       setToken(tok);
     }
     fetchTok()
-  }, [])
+    if(!token) {
+      router.push("/login");
+    }
+  }, [router, token])
   useEffect(() => {
     router.refresh();
     console.log(token, "actual token");
@@ -43,7 +46,6 @@ export default function Home() {
         console.log(todos, data);
         return data;
       } else if (!token) {
-        router.push("/login");
       }
     };
     getTodos();
