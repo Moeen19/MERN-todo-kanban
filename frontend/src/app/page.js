@@ -15,30 +15,33 @@ export default function Home() {
   const [todos, setTodos] = useState([]);
   let token;
   useEffect(() => {
-    const token = localStorage.getItem("jwt")
-    console.log(token, 'actual token')
-  
+    token = localStorage.getItem("jwt");
+    console.log(token, "actual token");
+
     const getTodos = async () => {
       if (token) {
-        const res = await fetch("https://mern-todo-kanban-production.up.railway.app/todos/getTodos", {
-          method: "POST",
-          body: JSON.stringify({ token: token }),
-          headers: { Cookie: token, "Content-type": "application/json" },
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://mern-todo-kanban-production.up.railway.app/todos/getTodos",
+          {
+            method: "POST",
+            body: JSON.stringify({ token: token }),
+            headers: { Cookie: token, "Content-type": "application/json" },
+            credentials: "include",
+          }
+        );
         // if (res.status !== 200) {
         //   // router.push('/login')
         // }
         const data = await res.json();
-        setTodos(data)
-        console.log(todos, data)
+        setTodos(data);
+        console.log(todos, data);
         return data;
       } else {
         // redirect("/login");
         router.push("/login");
       }
     };
-    getTodos()
+    getTodos();
   }, [token]);
 
   useEffect(() => {
