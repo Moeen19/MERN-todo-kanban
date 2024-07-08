@@ -5,7 +5,7 @@ import { protect } from "../middleware/authProtection.js";
 const router = express.Router();
 
 // GET all todos
-router.get("/", protect, getAllTodos);
+router.post("/getTodos", protect, getAllTodos);
 
 // Create new todo
 router.post("/", protect, createTodo);

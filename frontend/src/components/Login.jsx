@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-// import { cookie } from "next/headers"
 import { useRouter } from "next/navigation";
+// import { cookie } from "next/headers"
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Login({ token }) {
@@ -10,12 +10,15 @@ export default function Login({ token }) {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [incorrect, setIncorrect] = useState(false)
+  console.log(token)
+
+  
 
   useEffect(() => {
     router.refresh()
   }, []);
   if (token) {
-    router.push("/");
+    // router.push("/");
   }
   
   const handleSubmit = async (e) => {
@@ -36,6 +39,8 @@ export default function Login({ token }) {
       });
       if (res.ok) {
         const data = await res.json();
+        const token = data.token;
+        localStorage.setItem("jwt", token)
         console.log("User logged in");
         toast.loading("Logging In")
         router.push("/");

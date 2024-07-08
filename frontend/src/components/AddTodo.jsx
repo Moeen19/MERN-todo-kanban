@@ -9,6 +9,7 @@ export default function AddTodo({
   id,
   Upd,
   setNotDoneTodos,
+  token,
   setDoneTodos,
   setUpd,
   doneTodos,
@@ -46,11 +47,13 @@ export default function AddTodo({
         _id: id,
         title,
         description,
+        token,
       };
     } else if (!Upd) {
       todo = {
         title,
         description,
+        token,
       };
       meth = "POST";
     }

@@ -4,18 +4,23 @@ import { useRouter } from "next/navigation";
 import AddTodo from "./AddTodo";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Todos({ todos, token }) {
-  const router = useRouter()
+  const router = useRouter();
   const [notDoneTodos, setNotDoneTodos] = useState([]);
   const [Upd, setUpd] = useState(false);
   const [id, setId] = useState("");
   const [doneTodos, setDoneTodos] = useState([]);
   const [addModel, setAddModel] = useState(false);
+  console.log(todos, "asdfjlkasjdflj;lcxmv,zxcmv");
+
+  useEffect(() => {
+    toast.success("Welcome!");
+  }, []);
+
   useEffect(() => {
     if (token) {
-      toast.success('Welcome!')
       const notDone = todos.filter((item) => {
         return item.isDone === false;
       });
@@ -25,7 +30,7 @@ export default function Todos({ todos, token }) {
       setDoneTodos(done);
       setNotDoneTodos(notDone);
     }
-  }, []);
+  }, [todos]);
 
   const handleTodoClick = (todo) => {
     setId(todo);
@@ -37,17 +42,21 @@ export default function Todos({ todos, token }) {
     console.log(todos);
     const todoid = {
       _id: id,
+      token: token,
     };
     try {
-      const res = await fetch("https://mern-todo-kanban-production.up.railway.app/todos", {
-        method: "DELETE",
-        credentials: "include",
+      const res = await fetch(
+        "https://mern-todo-kanban-production.up.railway.app/todos",
+        {
+          method: "DELETE",
+          credentials: "include",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(todoid),
-      });
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(todoid),
+        }
+      );
       const data = await res.json();
       console.log(data);
       const notDone = data.filter((item) => item.isDone === false);
@@ -58,7 +67,7 @@ export default function Todos({ todos, token }) {
       setDoneTodos([...done]);
 
       if (res.ok) {
-        toast.error("Todo Deleted")
+        toast.error("Todo Deleted");
         console.log("Todo Deleted");
       }
     } catch (error) {
@@ -66,18 +75,21 @@ export default function Todos({ todos, token }) {
     }
   };
 
-  const updatingDoneProp = async( _id, status) => {
-    const res = await fetch("https://mern-todo-kanban-production.up.railway.app/todos", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ _id, status: status })
-    })
+  const updatingDoneProp = async (_id, status) => {
+    const res = await fetch(
+      "https://mern-todo-kanban-production.up.railway.app/todos",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ _id, status: status, token: token }),
+      }
+    );
     const data = res.json();
-    console.log("Todo status updated")
-  }
+    console.log("Todo status updated");
+  };
 
   const handleDragDrop = (results) => {
     const { source, destination, type } = results;
@@ -97,7 +109,7 @@ export default function Todos({ todos, token }) {
       if (destination.droppableId !== source.droppableId) {
         if (destination.droppableId === "DONE") {
           [delTodo] = reorderedTodos.splice(sourceIndex, 1);
-          toast.success("Todo moved to Completed")
+          toast.success("Todo moved to Completed");
           const todo = notDoneTodos[sourceIndex];
           updatingDoneProp(todo._id, true);
           doneTodos.splice(destinationIndex, 0, delTodo);
@@ -105,22 +117,28 @@ export default function Todos({ todos, token }) {
           return setDoneTodos(doneTodos);
         } else if (destination.droppableId === "ROOT") {
           [delTodo] = doneReordered.splice(sourceIndex, 1);
-          toast.success("Todo moved to Pending")
+          toast.success("Todo moved to Pending");
           const todo = doneTodos[sourceIndex];
           updatingDoneProp(todo._id, false);
           notDoneTodos.splice(destinationIndex, 0, delTodo);
           setDoneTodos(doneReordered);
           return setNotDoneTodos(notDoneTodos);
         }
-      } else if (source.droppableId === "ROOT" && destination.droppableId === "ROOT") {
+      } else if (
+        source.droppableId === "ROOT" &&
+        destination.droppableId === "ROOT"
+      ) {
         const [removedTodo] = reorderedTodos.splice(sourceIndex, 1);
         reorderedTodos.splice(destinationIndex, 0, removedTodo);
         return setNotDoneTodos(reorderedTodos);
-      }  else if (source.droppableId === "DONE" && destination.droppableId === "DONE") {
+      } else if (
+        source.droppableId === "DONE" &&
+        destination.droppableId === "DONE"
+      ) {
         const [removedTodo] = doneReordered.splice(sourceIndex, 1);
         doneReordered.splice(destinationIndex, 0, removedTodo);
         return setDoneTodos(doneReordered);
-      } 
+      }
     }
   };
 
@@ -130,6 +148,7 @@ export default function Todos({ todos, token }) {
       <div className="mt-[32px] flex justify-between">
         {addModel && (
           <AddTodo
+            token={token}
             notDoneTodos={notDoneTodos}
             id={id}
             setAddModel={setAddModel}

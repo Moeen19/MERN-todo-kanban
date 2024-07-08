@@ -3,7 +3,8 @@ import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function Logout() {
+export default function Logout({ todos }) {
+  console.log(todos)
   const router = useRouter();
   const handleLogout = async () => {
     try {
@@ -14,6 +15,7 @@ export default function Logout() {
       const data = await res.json();
       if (res.ok) {
         console.log(data.msg);
+        localStorage.removeItem("jwt")
         router.push("/login");
       }
     } catch (error) {

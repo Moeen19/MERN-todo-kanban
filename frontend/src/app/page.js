@@ -1,34 +1,49 @@
-"use server";
+"use client";
 import registerUser from "@/components/RegisterUser";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+// import { cookies } from "next/headers";
+// import { redirect } from "next/navigation";
 import Logout from "@/components/LogoutBtn";
 import Todos from "@/components/Todos";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+const token = localStorage.getItem("jwt");
 
-export default async function Home() {
-  const cookieStore = cookies();
-  const token = cookieStore.get("jwt");
+export default function Home() {
+  // const cookieStore = cookies();
+  // const token = cookieStore.get("jwt");
+  console.log(token, "kwlejafld;");
+  const router = useRouter();
+  const [todos, setTodos] = useState([]);
 
-  const getTodos = async () => {
-    if (token) {
-      const res = await fetch("https://mern-todo-kanban-production.up.railway.app/todos", {
-        method: "GET",
-        headers: { Cookie: cookies().toString() },
-        credentials: "include",
-      });
-      if (res.status !== 200) {
-        redirect("/login");
+  
+  
+  useEffect(() => {
+    const getTodos = async () => {
+      if (token) {
+        const res = await fetch("https://mern-todo-kanban-production.up.railway.app/todos/getTodos", {
+          method: "POST",
+          body: JSON.stringify({ token: token }),
+          headers: { Cookie: token, "Content-type": "application/json" },
+          credentials: "include",
+        });
+        // if (res.status !== 200) {
+        //   // router.push('/login')
+        // }
+        const data = await res.json();
+        setTodos(data)
+        console.log(todos, data)
+        return data;
+      } else {
+        // redirect("/login");
+        // router.push("/login");
       }
-      const data = await res.json();
-      console.log(data, "---asdf-");
-      return data;
-    } else {
-      redirect("/login");
-    }
-  };
+    };
+    getTodos()
+  }, [token]);
 
-  let todos = [];
-  todos = await getTodos();
+  useEffect(() => {
+    console.log("Updated todos state:", todos);
+  }, [todos]);
 
   return (
     <main className="">
@@ -36,7 +51,7 @@ export default async function Home() {
         <h1 className="text-white pl-[110px] font-semibold text-[62px] mx-auto w-fit">
           Todo Kanban
         </h1>
-        <Logout />
+        <Logout todos={todos} />
       </div>
       <Todos todos={todos} token={token} />
     </main>
