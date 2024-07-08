@@ -10,14 +10,14 @@ export default function Login({ token }) {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [incorrect, setIncorrect] = useState(false)
-  console.log(token)
+  console.log(token, 'token')
 
   useEffect(() => {
     router.refresh()
     if (token) {
       router.push("/");
     }
-  }, [token]);
+  }, []);
   
   const handleSubmit = async (e) => {
     e.preventDefault();

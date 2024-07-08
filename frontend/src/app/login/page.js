@@ -1,14 +1,17 @@
 "use client"
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Login from "@/components/Login";
 // import { cookies } from "next/headers";
 
 export default function login() {
-  let token;
+  // let token;
+  // const [token, setToken] = useState('');
+  const token = localStorage?.getItem("jwt")
   useEffect(() => {
-    token = localStorage.getItem("jwt")
-  }, [])
+    
+  }, [token])
+  // console.log(token, 'actual token')
   // const cookieStore = cookies();
   // const token = cookieStore.get('jwt');
 
