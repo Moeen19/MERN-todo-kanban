@@ -5,15 +5,12 @@ import Login from "@/components/Login";
 // import { cookies } from "next/headers";
 
 export default function login() {
-  // let token;
-  const [token, setToken] = useState('');
+  let token;
+  
   useEffect(() => {
-    const token = localStorage?.getItem("jwt")
-    setToken(token)
-  }, [token])
-  // console.log(token, 'actual token')
-  // const cookieStore = cookies();
-  // const token = cookieStore.get('jwt');
+    token = typeof window ? localStorage.getItem('jwt') : null;
+    console.log('pagejsToken,', token)
+  }, [])
 
   return (
     <Login token={token} />

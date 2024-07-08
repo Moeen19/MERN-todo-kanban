@@ -5,17 +5,18 @@ import { useRouter } from "next/navigation";
 // import { cookie } from "next/headers"
 import { ToastContainer, toast } from "react-toastify";
 
-export default function Login({ token }) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [incorrect, setIncorrect] = useState(false)
-  console.log(token, 'token')
-
+  let token;
   useEffect(() => {
     router.refresh()
+    token = typeof window ? localStorage.getItem("jwt") : null;
+    console.log(token, 'loginjs')
     if (token) {
-      router.push("/");
+      // router.push("/");
     }
   }, []);
   

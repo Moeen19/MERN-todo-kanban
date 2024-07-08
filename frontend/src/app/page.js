@@ -12,12 +12,11 @@ export default function Home() {
   // const token = cookieStore.get("jwt");
   // console.log(token, "kwlejafld;");
   const router = useRouter();
-  const [token, setToken] = useState('')
+  // const [token, setToken] = useState('')
   const [todos, setTodos] = useState([]);
-  // let token;
+  let token;
   useEffect(() => {
-    const tok = localStorage.getItem("jwt");
-    setToken(tok)
+    token = typeof window !== undefined ? localStorage.getItem("jwt") : null
     console.log(token, "actual token");
 
     const getTodos = async () => {
