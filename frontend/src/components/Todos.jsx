@@ -6,8 +6,7 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Todos({ todos }) {
-  console.log(todos)
+export default function Todos({ todos, token }) {
   const router = useRouter();
   const [notDoneTodos, setNotDoneTodos] = useState([]);
   const [Upd, setUpd] = useState(false);
@@ -15,15 +14,16 @@ export default function Todos({ todos }) {
   const [doneTodos, setDoneTodos] = useState([]);
   const [addModel, setAddModel] = useState(false);
   console.log(todos, "asdfjlkasjdflj;lcxmv,zxcmv");
-  let token;
+  // let token;
   useEffect(() => {
     toast.success("Welcome!");
-    token = typeof window !== undefined ? localStorage.getItem("jwt") : null;
+    // token = typeof window !== undefined ? localStorage.getItem("jwt") : null;
   }, []);
   
   useEffect(() => {
+    console.log(token, 'mmmmm')
     if (token) {
-      console.log(token)
+      console.log(todos, 'childdd')
       console.log(todos, 'mate')
       const notDone = todos.filter((item) => {
         return item.isDone === false;

@@ -12,17 +12,18 @@ export default function Home() {
   // const token = cookieStore.get("jwt");
   // console.log(token, "kwlejafld;");
   const router = useRouter();
-  // const [token, setToken] = useState('')
+  const [token, setToken] = useState('')
   const [todos, setTodos] = useState([]);
-  let token;
+  // let token;
   useEffect(() => {
-    token = typeof window !== undefined ? localStorage.getItem("jwt") : null
+    let tok = typeof window !== undefined ? localStorage.getItem("jwt") : null
+    setToken(tok)
     console.log(token, "actual token");
 
     const getTodos = async () => {
       if (token) {
         const res = await fetch(
-          "https://mern-todo-kanban-production.up.railway.app/todos/getTodos",
+          "http://localhost:5000/todos/getTodos",
           {
             method: "POST",
             body: JSON.stringify({ token: token }),
@@ -30,16 +31,16 @@ export default function Home() {
             credentials: "include",
           }
         );
-        // if (res.status !== 200) {
-        //   // router.push('/login')
-        // }
+        if (res.status !== 200) {
+          router.push('/login')
+        }
         const data = await res.json();
         setTodos(data);
         console.log(todos, data);
         return data;
       } else {
         // redirect("/login");
-        router.push("/login");
+        // router.push("/login");
       }
     };
     getTodos();
