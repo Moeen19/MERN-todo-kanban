@@ -42,6 +42,7 @@ export default function Login() {
         localStorage.setItem("jwt", token)
         console.log("User logged in");
         toast.loading("Logging In")
+        router.push("/");
       } else {
         setIncorrect(true)
       }
