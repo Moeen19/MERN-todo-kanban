@@ -14,10 +14,10 @@ export default function Login({ token }) {
 
   useEffect(() => {
     router.refresh()
+    if (token) {
+      router.push("/");
+    }
   }, []);
-  if (token) {
-    router.push("/");
-  }
   
   const handleSubmit = async (e) => {
     e.preventDefault();
