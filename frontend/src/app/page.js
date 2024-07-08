@@ -16,9 +16,14 @@ export default function Home() {
   const [todos, setTodos] = useState([]);
   // let token;
   useEffect(() => {
+    const fetchTok = () => {
+      let tok = typeof window !== undefined ? localStorage.getItem("jwt") : null;
+      setToken(tok);
+    }
+    fetchTok()
+  }, [])
+  useEffect(() => {
     router.refresh();
-    let tok = typeof window !== undefined ? localStorage.getItem("jwt") : null;
-    setToken(tok);
     console.log(token, "actual token");
 
     const getTodos = async () => {
