@@ -23,7 +23,7 @@ export default function Home() {
     const getTodos = async () => {
       if (token) {
         const res = await fetch(
-          "http://localhost:5000/todos/getTodos",
+          "https://mern-todo-kanban-production.up.railway.app/todos/getTodos",
           {
             method: "POST",
             body: JSON.stringify({ token: token }),

@@ -54,7 +54,6 @@ export default function Todos({ todos, token }) {
         {
           method: "DELETE",
           credentials: "include",
-
           headers: {
             "Content-Type": "application/json",
           },
