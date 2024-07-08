@@ -6,16 +6,20 @@ import Logout from "@/components/LogoutBtn";
 import Todos from "@/components/Todos";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-const token = localStorage.getItem("jwt");
 
 export default function Home() {
   // const cookieStore = cookies();
   // const token = cookieStore.get("jwt");
-  console.log(token, "kwlejafld;");
+  // console.log(token, "kwlejafld;");
   const router = useRouter();
   const [todos, setTodos] = useState([]);
-
+  let token;
   useEffect(() => {
+    const tok = localStorage.getItem("jwt")
+    if(tok) {
+      token = tok;
+      console.log(token)
+    }
     const getTodos = async () => {
       if (token) {
         const res = await fetch("https://mern-todo-kanban-production.up.railway.app/todos/getTodos", {
