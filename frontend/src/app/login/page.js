@@ -8,7 +8,7 @@ export default function login() {
   let token;
   
   useEffect(() => {
-    token = typeof window ? localStorage.getItem('jwt') : null;
+    token = typeof window !== undefined ? localStorage.getItem('jwt') : null;
     console.log('pagejsToken,', token)
   }, [])
 
