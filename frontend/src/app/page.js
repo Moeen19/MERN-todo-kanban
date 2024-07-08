@@ -45,6 +45,9 @@ export default function Home() {
     };
     getTodos();
   }, [token]);
+  if(!token) {
+    router.push('/login')
+  }
   
   useEffect(() => {
     console.log("Updated todos state:", todos);
