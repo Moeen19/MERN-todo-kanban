@@ -14,8 +14,8 @@ export default function Login({ token }) {
 
   useEffect(() => {
     router.refresh()
+    router.push("/");
     if (token) {
-      router.push("/");
     }
   }, []);
   
