@@ -33,9 +33,7 @@ export default function Home() {
             credentials: "include",
           }
         );
-        if (res.status !== 200) {
-          router.push('/login')
-        }
+       
         const data = await res.json();
         setTodos(data);
         console.log(todos, data);
