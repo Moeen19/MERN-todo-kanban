@@ -16,6 +16,10 @@ export default function Home() {
   const [todos, setTodos] = useState([]);
   // let token;
   useEffect(() => {
+    router.refresh()
+    if(!token) {
+      router.push('/login')
+    }
     let tok = typeof window !== undefined ? localStorage.getItem("jwt") : null
     setToken(tok)
     console.log(token, "actual token");
@@ -45,9 +49,7 @@ export default function Home() {
     };
     getTodos();
   }, [token]);
-  if(!token) {
-    router.push('/login')
-  }
+  
   
   useEffect(() => {
     console.log("Updated todos state:", todos);
