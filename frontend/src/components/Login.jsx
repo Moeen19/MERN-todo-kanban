@@ -16,7 +16,7 @@ export default function Login() {
     token = typeof window ? localStorage.getItem("jwt") : null;
     console.log(token, 'loginjs')
     if (token) {
-      // router.push("/");
+      router.push("/");
     }
   }, []);
   
