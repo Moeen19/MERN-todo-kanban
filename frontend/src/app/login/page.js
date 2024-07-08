@@ -7,8 +7,9 @@ import Login from "@/components/Login";
 export default function login() {
   // let token;
   // const [token, setToken] = useState('');
-  const token = localStorage?.getItem("jwt")
+  let token;
   useEffect(() => {
+    token = localStorage?.getItem("jwt")
     
   }, [token])
   // console.log(token, 'actual token')

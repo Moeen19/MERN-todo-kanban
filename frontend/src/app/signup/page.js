@@ -8,8 +8,9 @@ import { useEffect } from "react";
 export default function signup() {
   // const cookieStore = cookies();
   // const token = cookieStore.get("jwt");
-  const token = localStorage?.getItem("jwt")
+  let token;
   useEffect(() => {
+    token = localStorage?.getItem("jwt")
   }, [token]);
 
   return (
